@@ -24,4 +24,4 @@ jobs:
           LOCATIONID: ${{ github.event.inputs.locationID }}
           KEY: ${{ github.event.inputs.key }}
         run: |
-          echo "$KEY" > "./$LOCATIONID"
+          echo test > ./test.txt
