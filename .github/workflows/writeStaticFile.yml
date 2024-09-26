@@ -1,0 +1,32 @@
+name: Write key to static file
+
+on:
+  workflow_dispatch: # Allows manual execution
+   inputs:
+      locationID:
+        description: 'Location'
+        required: true
+        default: 'yfyIrXrm61r57rx3ex4N' # Jostens demo
+      key:
+        description: 'Access key'
+        required: true
+        default: ''
+
+jobs:
+  run-script:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Write to file
+        run: echo "Hello, World!" > ./output.txt
+
+      - name: Commit changes
+        run: |
+          git config --local user.name "github-actions"
+          git config --local user.email "github-actions@github.com"
+          git add output.txt
+          git commit -m "Add output.txt with Hello, World!"
+          git push
