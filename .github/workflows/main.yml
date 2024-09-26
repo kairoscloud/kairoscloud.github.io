@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run SMS ramp-up
+      - name: Write key
         env:
           LOCATIONID: ${{ github.event.inputs.locationID }}
           KEY: ${{ github.event.inputs.key }}
