@@ -1,7 +1,7 @@
 name: Write key to static file
 
 on:
-  repository_dispatch: # Allows manual execution
+  workflow_dispatch: # Allows manual execution
    inputs:
       locationID:
         description: 'Location'
@@ -11,6 +11,9 @@ on:
         description: 'Access key'
         required: true
         default: '1234'
+
+  repository_dispatch:
+    types: [write-static-key]
 
 jobs:
   write-file:
