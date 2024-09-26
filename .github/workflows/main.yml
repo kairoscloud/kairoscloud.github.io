@@ -1,27 +1,5 @@
-name: Write key to static file
-
-on:
-  workflow_dispatch: # Allows manual execution
-   inputs:
-      locationID:
-        description: 'Location'
-        required: true
-        default: 'yfyIrXrm61r57rx3ex4N' # Jostens demo
-      key:
-        description: 'Access key'
-        required: true
-        default: ''
-
-jobs:
-  run-script:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Write key
-        env:
-          LOCATIONID: ${{ github.event.inputs.locationID }}
-          KEY: ${{ github.event.inputs.key }}
-        run: |
-          echo test > ./test.txt
+name: Modify README.md
+  uses: jaywcjlove/github-action-modify-file-content@main
+  with:
+    path: README.md
+    body: "{{date:YYYY-MM-DD HH:mm:ss}}"
