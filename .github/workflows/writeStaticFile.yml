@@ -1,13 +1,9 @@
-name: Write key to static file
+name: Write keys to static file
 
 on:
   workflow_dispatch: # Allows manual execution
    inputs:
-      locationID:
-        description: 'Location'
-        required: true
-        default: 'yfyIrXrm61r57rx3ex4N'
-      key:
+      tokenString:
         description: 'Access key'
         required: true
         default: '1234'
@@ -27,12 +23,12 @@ jobs:
         run: mkdir -p ./staticTokens
 
       - name: Write to file
-        run: echo "${{ github.event.inputs.key }}" > "./staticTokens/${{ github.event.inputs.locationID }}"
+        run: echo "${{ github.event.inputs.tokenString }}" > "./staticTokens/all"
 
       - name: Commit changes
         run: |
           git config --local user.name "github-actions"
           git config --local user.email "github-actions@github.com"
-          git add "./staticTokens/${{ github.event.inputs.locationID }}"
-          git commit -m "Add key to ./staticTokens/${{ github.event.inputs.locationID }}"
+          git add "./staticTokens/all"
+          git commit -m "Add keys to ./staticTokens/all"
           git push
