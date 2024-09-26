@@ -1,7 +1,7 @@
 name: Write key to static file
 
 on:
-  workflow_dispatch: # Allows manual execution
+  repository_dispatch: # Allows manual execution
    inputs:
       locationID:
         description: 'Location'
