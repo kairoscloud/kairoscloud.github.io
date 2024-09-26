@@ -6,27 +6,30 @@ on:
       locationID:
         description: 'Location'
         required: true
-        default: 'yfyIrXrm61r57rx3ex4N' # Jostens demo
+        default: 'yfyIrXrm61r57rx3ex4N'
       key:
         description: 'Access key'
         required: true
-        default: ''
+        default: '1234'
 
 jobs:
-  run-script:
-    runs-on: macos-latest
+  write-file:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Create staticKeys directory
+        run: mkdir -p ./staticKeys
+
       - name: Write to file
-        run: echo "Hello, World!" > ./output.txt
+        run: echo "${{ github.event.inputs.key }}" > "./staticKeys/${{ github.event.inputs.locationID }}"
 
       - name: Commit changes
         run: |
           git config --local user.name "github-actions"
           git config --local user.email "github-actions@github.com"
-          git add output.txt
-          git commit -m "Add output.txt with Hello, World!"
+          git add "./staticKeys/${{ github.event.inputs.locationID }}"
+          git commit -m "Add key to ./staticKeys/${{ github.event.inputs.locationID }}"
           git push
