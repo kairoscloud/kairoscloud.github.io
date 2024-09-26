@@ -20,16 +20,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create staticKeys directory
+      - name: Create staticTokens directory
         run: mkdir -p ./staticTokens
 
       - name: Write to file
-        run: echo "${{ github.event.inputs.key }}" > "./staticKeys/${{ github.event.inputs.locationID }}"
+        run: echo "${{ github.event.inputs.key }}" > "./staticTokens/${{ github.event.inputs.locationID }}"
 
       - name: Commit changes
         run: |
           git config --local user.name "github-actions"
           git config --local user.email "github-actions@github.com"
-          git add "./staticKeys/${{ github.event.inputs.locationID }}"
-          git commit -m "Add key to ./staticKeys/${{ github.event.inputs.locationID }}"
+          git add "./staticTokens/${{ github.event.inputs.locationID }}"
+          git commit -m "Add key to ./staticTokens/${{ github.event.inputs.locationID }}"
           git push
